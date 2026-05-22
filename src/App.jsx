@@ -755,11 +755,11 @@ function App() {
             </h3>
 
             <p style={footerText}>
-              +91 99999 99999
+              +91 9419174662
             </p>
 
             <p style={footerText}>
-              info@chandrabhaga.com
+              chandrabhagallp22@gmail.com
             </p>
 
             <p style={footerText}>
