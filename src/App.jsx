@@ -5,6 +5,13 @@ import Lenis from "lenis";
 import logo from "./assets/logo.png";
 import heroBanner from "./assets/hero-banner.png";
 
+import guard1 from "./assets/gallery/guard1.jpg";
+import guard2 from "./assets/gallery/guard2.jpg";
+import guard3 from "./assets/gallery/guard3.jpg";
+import site1 from "./assets/gallery/site1.jpg";
+
+import { FaWhatsapp } from "react-icons/fa";
+
 /* LOADER */
 function Loader() {
   return (
@@ -180,6 +187,28 @@ function App() {
     "Government",
   ];
 
+  const galleryImages = [
+    {
+      image: guard1,
+      title: "Industrial Security Personnel",
+    },
+
+    {
+      image: guard2,
+      title: "Operational Site Patrol",
+    },
+
+    {
+      image: guard3,
+      title: "Rapid Response Officer",
+    },
+
+    {
+      image: site1,
+      title: "Enterprise Security Team",
+    },
+  ];
+
   return (
     <div
       style={{
@@ -237,7 +266,7 @@ function App() {
           style={{
             maxWidth: "1400px",
             margin: "auto",
-            padding: "20px 50px",
+            padding: "20px clamp(20px, 4vw, 50px)",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -317,7 +346,7 @@ function App() {
         animate={{ scale: 1 }}
         transition={{ duration: 2 }}
         style={{
-          minHeight: "115vh",
+          minHeight: "100vh",
           backgroundImage: `url(${heroBanner})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -355,7 +384,7 @@ function App() {
             maxWidth: "1400px",
             margin: "auto",
             width: "100%",
-            padding: "0 60px",
+            padding: "0 clamp(20px, 5vw, 60px)",
           }}
         >
           <motion.div
@@ -647,8 +676,129 @@ function App() {
         </section>
       </Reveal>
 
+      {/* GALLERY */}
+      <Reveal>
+        <section
+          style={{
+            padding: "140px clamp(20px,5vw,60px)",
+          }}
+        >
+          <div
+            style={{
+              maxWidth: "1400px",
+              margin: "auto",
+            }}
+          >
+            <div
+              style={{
+                textAlign: "center",
+                marginBottom: "90px",
+              }}
+            >
+              <p style={sectionTag}>
+                OPERATIONAL GALLERY
+              </p>
+
+              <h2 style={sectionTitle}>
+                Field Operations
+              </h2>
+            </div>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns:
+                  "repeat(auto-fit,minmax(280px,1fr))",
+                gap: "30px",
+              }}
+            >
+              {galleryImages.map((item, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{
+                    y: -10,
+                    scale: 1.02,
+                  }}
+                  transition={{
+                    duration: 0.4,
+                  }}
+                  style={{
+                    position: "relative",
+                    overflow: "hidden",
+                    borderRadius: "30px",
+                    height: "420px",
+                    background: "#111827",
+                    border:
+                      "1px solid rgba(59,130,246,0.15)",
+                    boxShadow:
+                      "0 0 40px rgba(37,99,235,0.08)",
+                  }}
+                >
+                  <motion.img
+                    src={item.image}
+                    alt={item.title}
+                    whileHover={{
+                      scale: 1.08,
+                    }}
+                    transition={{
+                      duration: 0.5,
+                    }}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background:
+                        "linear-gradient(to top, rgba(0,0,0,0.95), transparent 60%)",
+                    }}
+                  />
+
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: "30px",
+                      left: "30px",
+                      right: "30px",
+                    }}
+                  >
+                    <h3
+                      style={{
+                        fontSize: "32px",
+                        marginBottom: "12px",
+                        fontWeight: "700",
+                      }}
+                    >
+                      {item.title}
+                    </h3>
+
+                    <p
+                      style={{
+                        color: "#cbd5e1",
+                        lineHeight: 1.7,
+                        fontSize: "16px",
+                      }}
+                    >
+                      Professional industrial security
+                      operations and enterprise
+                      infrastructure deployment.
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </Reveal>
+
       {/* FOOTER */}
       <footer
+        id="contact"
         style={{
           borderTop: "1px solid rgba(255,255,255,0.08)",
           padding: "80px 60px",
@@ -786,6 +936,33 @@ function App() {
           All Rights Reserved.
         </div>
       </footer>
+
+      {/* WHATSAPP */}
+      <a
+        href="https://wa.me/919419174662"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          position: "fixed",
+          bottom: "25px",
+          right: "25px",
+          width: "72px",
+          height: "72px",
+          borderRadius: "50%",
+          background:
+            "linear-gradient(135deg,#22c55e,#16a34a)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "white",
+          fontSize: "36px",
+          zIndex: 99999,
+          boxShadow:
+            "0 0 35px rgba(34,197,94,0.45)",
+        }}
+      >
+        <FaWhatsapp />
+      </a>
     </div>
   );
 }
