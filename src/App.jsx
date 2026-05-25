@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Lenis from "lenis";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+
+import "swiper/css";
+
 import logo from "./assets/logo.png";
 import heroBanner from "./assets/hero-banner.png";
 
@@ -9,8 +14,6 @@ import guard1 from "./assets/gallery/guard1.jpg";
 import guard2 from "./assets/gallery/guard2.jpg";
 import guard3 from "./assets/gallery/guard3.jpg";
 import site1 from "./assets/gallery/site1.jpg";
-
-import { FaWhatsapp } from "react-icons/fa";
 
 /* LOADER */
 function Loader() {
@@ -61,6 +64,7 @@ function Loader() {
           color: "white",
           fontSize: "42px",
           fontWeight: "800",
+          textAlign: "center",
         }}
       >
         Chandrabhaga Security
@@ -112,6 +116,7 @@ function Reveal({ children }) {
 function App() {
   const [loading, setLoading] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [mobileMenu, setMobileMenu] = useState(false);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -187,26 +192,13 @@ function App() {
     "Government",
   ];
 
-  const galleryImages = [
-    {
-      image: guard1,
-      title: "Industrial Security Personnel",
-    },
-
-    {
-      image: guard2,
-      title: "Operational Site Patrol",
-    },
-
-    {
-      image: guard3,
-      title: "Rapid Response Officer",
-    },
-
-    {
-      image: site1,
-      title: "Enterprise Security Team",
-    },
+  const gallery = [
+    guard1,
+    guard2,
+    guard3,
+    site1,
+    guard1,
+    guard2,
   ];
 
   return (
@@ -232,6 +224,31 @@ function App() {
           boxShadow: "0 0 20px rgba(37,99,235,0.7)",
         }}
       />
+
+      {/* WHATSAPP */}
+      <a
+        href="https://wa.me/919419174662"
+        target="_blank"
+        rel="noreferrer"
+        style={{
+          position: "fixed",
+          right: "20px",
+          bottom: "20px",
+          width: "65px",
+          height: "65px",
+          borderRadius: "50%",
+          background: "#16a34a",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          fontSize: "32px",
+          textDecoration: "none",
+          zIndex: 99999,
+          boxShadow: "0 0 30px rgba(22,163,74,0.5)",
+        }}
+      >
+        💬
+      </a>
 
       {/* GLOW */}
       <div
@@ -266,11 +283,10 @@ function App() {
           style={{
             maxWidth: "1400px",
             margin: "auto",
-            padding: "20px clamp(20px, 4vw, 50px)",
+            padding: "20px 20px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            flexWrap: "wrap",
             gap: "20px",
           }}
         >
@@ -286,14 +302,17 @@ function App() {
               src={logo}
               alt="logo"
               style={{
-                width: "70px",
+                width: window.innerWidth < 768 ? "55px" : "70px",
               }}
             />
 
             <div>
               <h1
                 style={{
-                  fontSize: "clamp(24px, 4vw, 38px)",
+                  fontSize:
+                    window.innerWidth < 768
+                      ? "26px"
+                      : "38px",
                   fontWeight: "800",
                   margin: 0,
                 }}
@@ -305,6 +324,10 @@ function App() {
                 style={{
                   margin: 0,
                   color: "#9ca3af",
+                  fontSize:
+                    window.innerWidth < 768
+                      ? "16px"
+                      : "18px",
                 }}
               >
                 Security LLP
@@ -312,13 +335,35 @@ function App() {
             </div>
           </div>
 
-          {/* MENU */}
+          {/* MOBILE BUTTON */}
+          <button
+            onClick={() =>
+              setMobileMenu(!mobileMenu)
+            }
+            style={{
+              display:
+                window.innerWidth < 768
+                  ? "block"
+                  : "none",
+              background: "transparent",
+              border: "none",
+              color: "white",
+              fontSize: "32px",
+              cursor: "pointer",
+            }}
+          >
+            ☰
+          </button>
+
+          {/* DESKTOP MENU */}
           <div
             style={{
-              display: "flex",
+              display:
+                window.innerWidth < 768
+                  ? "none"
+                  : "flex",
               gap: "30px",
               fontSize: "18px",
-              flexWrap: "wrap",
             }}
           >
             <a href="#" style={linkStyle}>
@@ -333,11 +378,48 @@ function App() {
               Industries
             </a>
 
+            <a href="#gallery" style={linkStyle}>
+              Gallery
+            </a>
+
             <a href="#contact" style={linkStyle}>
               Contact
             </a>
           </div>
         </div>
+
+        {/* MOBILE MENU */}
+        {mobileMenu && (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+              padding: "20px",
+              background: "#020617",
+            }}
+          >
+            <a href="#" style={linkStyle}>
+              Home
+            </a>
+
+            <a href="#services" style={linkStyle}>
+              Services
+            </a>
+
+            <a href="#industries" style={linkStyle}>
+              Industries
+            </a>
+
+            <a href="#gallery" style={linkStyle}>
+              Gallery
+            </a>
+
+            <a href="#contact" style={linkStyle}>
+              Contact
+            </a>
+          </div>
+        )}
       </nav>
 
       {/* HERO */}
@@ -346,17 +428,15 @@ function App() {
         animate={{ scale: 1 }}
         transition={{ duration: 2 }}
         style={{
-          minHeight: "100vh",
+          minHeight: "110vh",
           backgroundImage: `url(${heroBanner})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundPositionY: `${scrollProgress * 0.5}px`,
           position: "relative",
           display: "flex",
           alignItems: "center",
         }}
       >
-        {/* OVERLAY */}
         <div
           style={{
             position: "absolute",
@@ -365,7 +445,6 @@ function App() {
           }}
         />
 
-        {/* GRID */}
         <div
           style={{
             position: "absolute",
@@ -376,7 +455,6 @@ function App() {
           }}
         />
 
-        {/* CONTENT */}
         <div
           style={{
             position: "relative",
@@ -384,22 +462,20 @@ function App() {
             maxWidth: "1400px",
             margin: "auto",
             width: "100%",
-            padding: "0 clamp(20px, 5vw, 60px)",
+            padding:
+              window.innerWidth < 768
+                ? "0 20px"
+                : "0 60px",
           }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 1.2,
-            }}
+          <div
             style={{
               maxWidth: "1000px",
-              paddingTop: "220px",
-              paddingBottom: "180px",
+              paddingTop:
+                window.innerWidth < 768
+                  ? "220px"
+                  : "180px",
+              paddingBottom: "100px",
             }}
           >
             <p
@@ -407,7 +483,10 @@ function App() {
                 color: "#3b82f6",
                 letterSpacing: "6px",
                 marginBottom: "25px",
-                fontSize: "18px",
+                fontSize:
+                  window.innerWidth < 768
+                    ? "14px"
+                    : "18px",
               }}
             >
               PROTECTING WHAT MATTERS
@@ -415,11 +494,13 @@ function App() {
 
             <h1
               style={{
-                fontSize: "clamp(56px, 9vw, 96px)",
+                fontSize:
+                  window.innerWidth < 768
+                    ? "58px"
+                    : "96px",
                 lineHeight: 1,
                 fontWeight: "900",
                 marginBottom: "30px",
-                textShadow: "0 0 40px rgba(37,99,235,0.3)",
               }}
             >
               Enterprise Security
@@ -436,51 +517,51 @@ function App() {
 
             <p
               style={{
-                fontSize: "clamp(18px, 2vw, 28px)",
+                fontSize:
+                  window.innerWidth < 768
+                    ? "18px"
+                    : "24px",
                 lineHeight: 1.7,
                 color: "#d1d5db",
                 maxWidth: "720px",
               }}
             >
-              Professional armed & unarmed security solutions
-              for industrial operations, power projects and
-              enterprise infrastructure protection.
+              Professional armed & unarmed
+              security solutions for industrial
+              operations, power projects and
+              enterprise infrastructure
+              protection.
             </p>
 
-            {/* BUTTONS */}
             <div
               style={{
                 display: "flex",
-                gap: "25px",
+                gap: "20px",
                 marginTop: "50px",
                 flexWrap: "wrap",
               }}
             >
-              <motion.button
+              <motion.a
+                href="#services"
                 whileHover={{
                   scale: 1.05,
-                }}
-                whileTap={{
-                  scale: 0.95,
                 }}
                 style={primaryButton}
               >
                 Explore Services
-              </motion.button>
+              </motion.a>
 
-              <motion.button
+              <motion.a
+                href="#contact"
                 whileHover={{
                   scale: 1.05,
-                }}
-                whileTap={{
-                  scale: 0.95,
                 }}
                 style={secondaryButton}
               >
                 Contact Us
-              </motion.button>
+              </motion.a>
             </div>
-          </motion.div>
+          </div>
         </div>
       </motion.section>
 
@@ -491,7 +572,10 @@ function App() {
             marginTop: "-30px",
             position: "relative",
             zIndex: 20,
-            padding: "0 60px",
+            padding:
+              window.innerWidth < 768
+                ? "0 20px"
+                : "0 60px",
           }}
         >
           <div
@@ -518,13 +602,7 @@ function App() {
                 }}
                 style={glassCard}
               >
-                <h2
-                  style={{
-                    ...statNumber,
-                    textShadow:
-                      "0 0 25px rgba(37,99,235,0.35)",
-                  }}
-                >
+                <h2 style={statNumber}>
                   {item[0]}
                 </h2>
 
@@ -547,7 +625,10 @@ function App() {
         <section
           id="services"
           style={{
-            padding: "140px 60px",
+            padding:
+              window.innerWidth < 768
+                ? "100px 20px"
+                : "140px 60px",
           }}
         >
           <div
@@ -611,7 +692,10 @@ function App() {
         <section
           id="industries"
           style={{
-            padding: "140px 60px",
+            padding:
+              window.innerWidth < 768
+                ? "100px 20px"
+                : "140px 60px",
             background: "rgba(255,255,255,0.02)",
           }}
         >
@@ -679,20 +763,27 @@ function App() {
       {/* GALLERY */}
       <Reveal>
         <section
+          id="gallery"
           style={{
-            padding: "140px clamp(20px,5vw,60px)",
+            padding:
+              window.innerWidth < 768
+                ? "100px 20px"
+                : "140px 60px",
+            background:
+              "linear-gradient(to bottom,#020617,#010b2d)",
+            overflow: "hidden",
           }}
         >
           <div
             style={{
-              maxWidth: "1400px",
+              maxWidth: "1600px",
               margin: "auto",
             }}
           >
             <div
               style={{
                 textAlign: "center",
-                marginBottom: "90px",
+                marginBottom: "80px",
               }}
             >
               <p style={sectionTag}>
@@ -704,94 +795,108 @@ function App() {
               </h2>
             </div>
 
-            <div
+            <Swiper
+              modules={[Autoplay]}
+              slidesPerView={"auto"}
+              spaceBetween={25}
+              loop={true}
+              speed={5000}
+              autoplay={{
+                delay: 0,
+                disableOnInteraction: false,
+              }}
+              allowTouchMove={false}
               style={{
-                display: "grid",
-                gridTemplateColumns:
-                  "repeat(auto-fit,minmax(280px,1fr))",
-                gap: "30px",
+                padding: "20px 0",
               }}
             >
-              {galleryImages.map((item, index) => (
-                <motion.div
+              {gallery.map((img, index) => (
+                <SwiperSlide
                   key={index}
-                  whileHover={{
-                    y: -10,
-                    scale: 1.02,
-                  }}
-                  transition={{
-                    duration: 0.4,
-                  }}
                   style={{
-                    position: "relative",
-                    overflow: "hidden",
-                    borderRadius: "30px",
-                    height: "420px",
-                    background: "#111827",
-                    border:
-                      "1px solid rgba(59,130,246,0.15)",
-                    boxShadow:
-                      "0 0 40px rgba(37,99,235,0.08)",
+                    width: "320px",
                   }}
                 >
-                  <motion.img
-                    src={item.image}
-                    alt={item.title}
+                  <motion.div
                     whileHover={{
-                      scale: 1.08,
-                    }}
-                    transition={{
-                      duration: 0.5,
+                      y: -10,
                     }}
                     style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                  />
-
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      background:
-                        "linear-gradient(to top, rgba(0,0,0,0.95), transparent 60%)",
-                    }}
-                  />
-
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: "30px",
-                      left: "30px",
-                      right: "30px",
+                      position: "relative",
+                      height: "520px",
+                      borderRadius: "30px",
+                      overflow: "hidden",
+                      border:
+                        "1px solid rgba(255,255,255,0.08)",
+                      boxShadow:
+                        "0 10px 40px rgba(0,0,0,0.45)",
                     }}
                   >
-                    <h3
+                    <img
+                      src={img}
+                      alt="gallery"
                       style={{
-                        fontSize: "32px",
-                        marginBottom: "12px",
-                        fontWeight: "700",
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
                       }}
-                    >
-                      {item.title}
-                    </h3>
+                    />
 
-                    <p
+                    <div
                       style={{
-                        color: "#cbd5e1",
-                        lineHeight: 1.7,
-                        fontSize: "16px",
+                        position: "absolute",
+                        inset: 0,
+                        background:
+                          "linear-gradient(to top, rgba(0,0,0,0.92), rgba(0,0,0,0.2))",
+                      }}
+                    />
+
+                    <div
+                      style={{
+                        position: "absolute",
+                        bottom: "30px",
+                        left: "25px",
+                        right: "25px",
+                        zIndex: 5,
                       }}
                     >
-                      Professional industrial security
-                      operations and enterprise
-                      infrastructure deployment.
-                    </p>
-                  </div>
-                </motion.div>
+                      <h3
+                        style={{
+                          fontSize: "30px",
+                          fontWeight: "800",
+                          lineHeight: 1.2,
+                          marginBottom: "15px",
+                        }}
+                      >
+                        {index % 4 === 0 &&
+                          "Industrial Security Personnel"}
+
+                        {index % 4 === 1 &&
+                          "Operational Site Patrol"}
+
+                        {index % 4 === 2 &&
+                          "Rapid Response Officer"}
+
+                        {index % 4 === 3 &&
+                          "Enterprise Security Team"}
+                      </h3>
+
+                      <p
+                        style={{
+                          color: "#d1d5db",
+                          lineHeight: 1.7,
+                          fontSize: "16px",
+                        }}
+                      >
+                        Professional industrial security
+                        operations and enterprise
+                        infrastructure deployment.
+                      </p>
+                    </div>
+                  </motion.div>
+                </SwiperSlide>
               ))}
-            </div>
+            </Swiper>
           </div>
         </section>
       </Reveal>
@@ -800,8 +905,12 @@ function App() {
       <footer
         id="contact"
         style={{
-          borderTop: "1px solid rgba(255,255,255,0.08)",
-          padding: "80px 60px",
+          borderTop:
+            "1px solid rgba(255,255,255,0.08)",
+          padding:
+            window.innerWidth < 768
+              ? "60px 20px"
+              : "80px 60px",
           background: "#010409",
         }}
       >
@@ -860,9 +969,9 @@ function App() {
                 fontSize: "17px",
               }}
             >
-              Delivering enterprise-grade security
-              solutions for industrial and infrastructure
-              operations.
+              Delivering enterprise-grade
+              security solutions for industrial
+              and infrastructure operations.
             </p>
           </div>
 
@@ -874,7 +983,7 @@ function App() {
             <p style={footerText}>Home</p>
             <p style={footerText}>Services</p>
             <p style={footerText}>Industries</p>
-            <p style={footerText}>Contact</p>
+            <p style={footerText}>Gallery</p>
           </div>
 
           <div>
@@ -905,19 +1014,19 @@ function App() {
             </h3>
 
             <p style={footerText}>
-              +91 9419174662
+              📞 +91 9419174662
             </p>
 
             <p style={footerText}>
-              chandrabhagallp22@gmail.com
+              ✉️ chandrabhagallp22@gmail.com
             </p>
 
             <p style={footerText}>
-              India
+              📍 India
             </p>
 
             <p style={footerText}>
-              24×7 Support
+              🕒 24×7 Support
             </p>
           </div>
         </div>
@@ -936,33 +1045,6 @@ function App() {
           All Rights Reserved.
         </div>
       </footer>
-
-      {/* WHATSAPP */}
-      <a
-        href="https://wa.me/919419174662"
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          position: "fixed",
-          bottom: "25px",
-          right: "25px",
-          width: "72px",
-          height: "72px",
-          borderRadius: "50%",
-          background:
-            "linear-gradient(135deg,#22c55e,#16a34a)",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          color: "white",
-          fontSize: "36px",
-          zIndex: 99999,
-          boxShadow:
-            "0 0 35px rgba(34,197,94,0.45)",
-        }}
-      >
-        <FaWhatsapp />
-      </a>
     </div>
   );
 }
@@ -972,17 +1054,25 @@ function App() {
 const linkStyle = {
   color: "#d1d5db",
   textDecoration: "none",
+  fontSize: "18px",
 };
 
 const primaryButton = {
-  background: "#2563eb",
+  background:
+    "linear-gradient(135deg,#2563eb,#3b82f6)",
   color: "white",
   border: "none",
   padding: "20px 42px",
   borderRadius: "18px",
   fontSize: "20px",
   cursor: "pointer",
-  boxShadow: "0 0 40px rgba(37,99,235,0.45)",
+  boxShadow:
+    "0 0 40px rgba(37,99,235,0.45)",
+  textDecoration: "none",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontWeight: "600",
 };
 
 const secondaryButton = {
@@ -993,16 +1083,24 @@ const secondaryButton = {
   borderRadius: "18px",
   fontSize: "20px",
   cursor: "pointer",
+  backdropFilter: "blur(10px)",
+  textDecoration: "none",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontWeight: "600",
 };
 
 const glassCard = {
   background: "rgba(255,255,255,0.06)",
-  border: "1px solid rgba(59,130,246,0.15)",
+  border:
+    "1px solid rgba(59,130,246,0.15)",
   backdropFilter: "blur(18px)",
   borderRadius: "30px",
   padding: "45px",
   textAlign: "center",
-  boxShadow: "0 0 30px rgba(37,99,235,0.08)",
+  boxShadow:
+    "0 0 30px rgba(37,99,235,0.08)",
 };
 
 const sectionTag = {
@@ -1018,11 +1116,13 @@ const sectionTitle = {
 
 const serviceCard = {
   background: "rgba(255,255,255,0.05)",
-  border: "1px solid rgba(59,130,246,0.12)",
+  border:
+    "1px solid rgba(59,130,246,0.12)",
   borderRadius: "30px",
   padding: "45px",
   backdropFilter: "blur(14px)",
-  boxShadow: "0 0 30px rgba(37,99,235,0.08)",
+  boxShadow:
+    "0 0 30px rgba(37,99,235,0.08)",
 };
 
 const serviceIcon = {
@@ -1043,7 +1143,8 @@ const serviceDesc = {
 
 const industryCard = {
   background: "rgba(255,255,255,0.05)",
-  border: "1px solid rgba(59,130,246,0.12)",
+  border:
+    "1px solid rgba(59,130,246,0.12)",
   borderRadius: "25px",
   padding: "40px",
   textAlign: "center",
