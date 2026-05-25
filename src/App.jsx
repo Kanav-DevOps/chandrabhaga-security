@@ -15,6 +15,11 @@ import guard2 from "./assets/gallery/guard2.jpg";
 import guard3 from "./assets/gallery/guard3.jpg";
 import site1 from "./assets/gallery/site1.jpg";
 
+import iso1 from "./assets/certificates/iso1.pdf";
+import iso2 from "./assets/certificates/iso2.pdf";
+import iso1Preview from "./assets/certificates/iso1-preview.jpg";
+import iso2Preview from "./assets/certificates/iso2-preview.jpg";
+
 /* LOADER */
 function Loader() {
   return (
@@ -759,6 +764,241 @@ function App() {
           </div>
         </section>
       </Reveal>
+
+      {/* CERTIFICATIONS */}
+<Reveal>
+  <section
+    style={{
+      padding:
+        window.innerWidth < 768
+          ? "100px 20px"
+          : "140px 60px",
+      position: "relative",
+      overflow: "hidden",
+    }}
+  >
+    {/* BACKGROUND GLOW */}
+    <div
+      style={{
+        position: "absolute",
+        width: "500px",
+        height: "500px",
+        background:
+          "radial-gradient(circle, rgba(37,99,235,0.18), transparent)",
+        top: "-150px",
+        right: "-150px",
+        filter: "blur(100px)",
+      }}
+    />
+
+    <div
+      style={{
+        maxWidth: "1500px",
+        margin: "auto",
+        position: "relative",
+        zIndex: 5,
+      }}
+    >
+      <div
+        style={{
+          textAlign: "center",
+          marginBottom: "90px",
+        }}
+      >
+        <p style={sectionTag}>
+          VERIFIED & CERTIFIED
+        </p>
+
+        <h2 style={sectionTitle}>
+          Globally Certified Security Standards
+        </h2>
+
+        <p
+          style={{
+            color: "#9ca3af",
+            maxWidth: "850px",
+            margin: "25px auto 0",
+            lineHeight: 1.9,
+            fontSize: "19px",
+          }}
+        >
+          Chandrabhaga Security LLP follows
+          internationally recognized operational,
+          occupational safety and professional
+          manpower management standards.
+        </p>
+      </div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns:
+            "repeat(auto-fit, minmax(420px, 1fr))",
+          gap: "40px",
+        }}
+      >
+        {[
+          {
+            file: iso1,
+            preview: iso1Preview,
+            title: "ISO 45001:2018",
+            subtitle:
+              "Occupational Health & Safety",
+          },
+
+          {
+            file: iso2,
+            preview: iso2Preview,
+            title: "Certified Security Standards",
+            subtitle:
+              "Professional Security Operations",
+          },
+        ].map((cert, index) => (
+          <motion.div
+            key={index}
+            whileHover={{
+              y: -12,
+              scale: 1.02,
+            }}
+            transition={{
+              duration: 0.4,
+            }}
+            style={{
+              position: "relative",
+              background:
+                "rgba(255,255,255,0.04)",
+              border:
+                "1px solid rgba(255,255,255,0.08)",
+              borderRadius: "34px",
+              overflow: "hidden",
+              backdropFilter: "blur(18px)",
+              boxShadow:
+                "0 10px 50px rgba(0,0,0,0.45)",
+            }}
+          >
+            {/* TOP BLUE LINE */}
+            <div
+              style={{
+                height: "5px",
+                background:
+                  "linear-gradient(to right,#2563eb,#60a5fa)",
+              }}
+            />
+
+            {/* CERTIFICATE IMAGE */}
+            <div
+              style={{
+                padding: "25px",
+              }}
+            >
+              <img
+                src={cert.preview}
+                alt="certificate"
+                style={{
+                  width: "100%",
+                  height: "380px",
+                  objectFit: "cover",
+                  borderRadius: "24px",
+                  border:
+                    "1px solid rgba(255,255,255,0.08)",
+                }}
+              />
+            </div>
+
+            {/* CONTENT */}
+            <div
+              style={{
+                padding:
+                  "0 30px 35px 30px",
+              }}
+            >
+              {/* VERIFIED BADGE */}
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  background:
+                    "rgba(37,99,235,0.12)",
+                  border:
+                    "1px solid rgba(59,130,246,0.25)",
+                  padding: "10px 18px",
+                  borderRadius: "999px",
+                  marginBottom: "25px",
+                  color: "#60a5fa",
+                  fontSize: "14px",
+                  fontWeight: "600",
+                }}
+              >
+                ✅ VERIFIED CERTIFICATION
+              </div>
+
+              <h3
+                style={{
+                  fontSize: "34px",
+                  marginBottom: "12px",
+                  fontWeight: "800",
+                }}
+              >
+                {cert.title}
+              </h3>
+
+              <p
+                style={{
+                  color: "#60a5fa",
+                  marginBottom: "20px",
+                  fontSize: "18px",
+                }}
+              >
+                {cert.subtitle}
+              </p>
+
+              <p
+                style={{
+                  color: "#9ca3af",
+                  lineHeight: 1.9,
+                  fontSize: "17px",
+                  marginBottom: "35px",
+                }}
+              >
+                Internationally recognized
+                operational standards ensuring
+                trusted enterprise-grade security
+                operations and workforce
+                management systems.
+              </p>
+
+              <a
+                href={cert.file}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "12px",
+                  background:
+                    "linear-gradient(135deg,#2563eb,#3b82f6)",
+                  color: "white",
+                  padding: "18px 32px",
+                  borderRadius: "18px",
+                  textDecoration: "none",
+                  fontWeight: "700",
+                  fontSize: "17px",
+                  boxShadow:
+                    "0 0 30px rgba(37,99,235,0.4)",
+                }}
+              >
+                View Official Certificate
+              </a>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Reveal>
+
 
       {/* GALLERY */}
       <Reveal>
