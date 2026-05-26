@@ -13,7 +13,13 @@ import heroBanner from "./assets/hero-banner.png";
 import guard1 from "./assets/gallery/guard1.jpg";
 import guard2 from "./assets/gallery/guard2.jpg";
 import guard3 from "./assets/gallery/guard3.jpg";
+import guard4 from "./assets/gallery/guard4.jpg";
+import guard5 from "./assets/gallery/guard5.jpg";
+import guard6 from "./assets/gallery/guard6.jpg";
+import guard7 from "./assets/gallery/guard7.jpg";
+import guard8 from "./assets/gallery/guard8.jpg";
 import site1 from "./assets/gallery/site1.jpg";
+import site2 from "./assets/gallery/site2.jpg";
 
 import iso1 from "./assets/certificates/iso1.pdf";
 import iso2 from "./assets/certificates/iso2.pdf";
@@ -201,9 +207,19 @@ function App() {
     guard1,
     guard2,
     guard3,
+    guard4,
+    guard5,
+    guard6,
+    guard7,
+    guard8,
+
     site1,
+    site2,
+
     guard1,
     guard2,
+    guard3,
+    guard4,
   ];
 
   return (
@@ -307,7 +323,7 @@ function App() {
               src={logo}
               alt="logo"
               style={{
-                width: window.innerWidth < 768 ? "55px" : "70px",
+                width: window.innerWidth < 768 ? "42px" : "52px",
               }}
             />
 
